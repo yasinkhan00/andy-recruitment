@@ -15,7 +15,6 @@ Job List
                         <h4 class="text-uppercase title mb-4">Job List view</h4>
                         <ul class="page-next d-inline-block mb-0">
                             <li><a href="{{route('home')}}" class="text-uppercase font-weight-bold">Home</a></li>
-                            <!-- <li><a href="job-list.html#" class="text-uppercase font-weight-bold">Jobs</a></li>  -->
                             <li>
                                 <span class="text-uppercase text-white font-weight-bold">Job Listing</span> 
                             </li>
