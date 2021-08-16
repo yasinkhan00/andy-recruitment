@@ -14,7 +14,7 @@ Job List
                     <div class="text-center text-white">
                         <h4 class="text-uppercase title mb-4">Job List view</h4>
                         <ul class="page-next d-inline-block mb-0">
-                            <li><a href="index.html" class="text-uppercase font-weight-bold">Home</a></li>
+                            <li><a href="{{route('home')}}" class="text-uppercase font-weight-bold">Home</a></li>
                             <!-- <li><a href="job-list.html#" class="text-uppercase font-weight-bold">Jobs</a></li>  -->
                             <li>
                                 <span class="text-uppercase text-white font-weight-bold">Job Listing</span> 
@@ -56,7 +56,7 @@ Job List
 
     <!-- JOB LIST START -->
     <section class="section pt-0">
-        
+
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12">
@@ -103,12 +103,12 @@ Job List
 
                                         @if(isset($categ))
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="all-cat" name="category" class="custom-control-input">
+                                            <input type="radio" id="all-cat" name="category" class="custom-control-input all-cat" onclick="allcateg(this.value)">
                                             <label class="custom-control-label ml-1 text-muted f-15" for="all-cat">All</label>
                                         </div>
                                         @foreach(array_unique($categ) as $c)
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="{!! str_replace(' ','-',$c) !!}" name="category" class="custom-control-input">
+                                            <input type="radio" id="{!! str_replace(' ','-',$c) !!}" name="category" class="custom-control-input catclass" onclick="categ_func('{!! str_replace(' ','-',$c) !!}')">
                                             <label class="custom-control-label ml-1 text-muted f-15" for="{!! str_replace(' ','-',$c) !!}">{{$c}}</label>
                                         </div>
                                         @endforeach
@@ -129,12 +129,12 @@ Job List
                                         
                                          @if(isset($exp))
                                          <div class="custom-control custom-radio">
-                                            <input type="radio" id="all-exp" name="experience" class="custom-control-input">
+                                            <input type="radio" id="all-exp" name="experience" class="custom-control-input all-exp" onclick="allexpfunc(this.value)">
                                             <label class="custom-control-label ml-1 text-muted f-15" for="all-exp">All</label>
                                         </div>
                                          @foreach(array_unique($exp) as $ex)
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="{!! str_replace(' ','-',$ex) !!}" name="experience" class="custom-control-input">
+                                            <input type="radio" id="{!! str_replace(' ','-',$ex) !!}" name="experience" class="custom-control-input expclass" onclick="expfunc('{!! str_replace(' ','-',$ex) !!}')">
                                             <label class="custom-control-label ml-1 text-muted f-15" for="{!! str_replace(' ','-',$ex) !!}">{{$ex}}</label>
                                         </div>
                                         @endforeach
@@ -156,7 +156,7 @@ Job List
                                          @if(isset($gender))
                                          @foreach(array_unique($gender) as $g)
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="{!! str_replace(' ','-',$g) !!}" name="gender" class="custom-control-input">
+                                            <input type="radio" id="{!! str_replace(' ','-',$g) !!}" name="gender" class="custom-control-input gendclass" onclick="gendfunc('{!! str_replace(' ','-',$g) !!}')">
                                             <label class="custom-control-label ml-1 text-muted f-15" for="{!! str_replace(' ','-',$g) !!}">{{$g}}</label>
                                         </div>
                                          @endforeach
@@ -186,7 +186,7 @@ Job List
                         
                         @if(isset($job_search))
                         @foreach($job_search as $job)
-                        <div class="col-lg-12 mt-4 pt-2 {!! str_replace(' ','-',$job->job_category->category_name) !!} {!! str_replace(' ','-',$job->other_details->experience) !!} {!! str_replace(' ','-',$job->other_details->gender) !!}">
+                        <div class="col-lg-12 mt-4 pt-2 {!! str_replace(' ','-',$job->job_category->category_name) !!} {!! str_replace(' ','-',$job->other_details->experience) !!} {!! str_replace(' ','-',$job->other_details->gender) !!} commonclass">
                             <div class="job-list-box border rounded">
                                 <div class="p-3">
                                     <div class="row align-items-center">
@@ -197,7 +197,7 @@ Job List
                                         </div>
                                         <div class="col-lg-7 col-md-9">
                                             <div class="job-list-desc">
-                                                <h6 class="mb-2"><a href="job-list.html#" class="text-dark">{{$job->job_title}}</a></h6>
+                                                <h6 class="mb-2"><a href="{{route('jobdetail',[$job->id])}}" class="text-dark">{{$job->job_title}}</a></h6>
                                                 <p class="text-muted mb-0"><i class="mdi mdi-bank mr-2"></i>{{$job->company_details->company_name}}</p>
                                                 <ul class="list-inline mb-0">
                                                     <li class="list-inline-item mr-3">
@@ -215,7 +215,7 @@ Job List
                                                 @endif
 
                                                 <div class="mt-3">
-                                                    <a href="job-list.html#" class="btn btn-sm btn-primary">Apply</a>
+                                                    <a href="{{route('jobdetail',[$job->id])}}" class="btn btn-sm btn-primary">Apply</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -235,6 +235,57 @@ Job List
     <!-- JOB LIST START -->
 
    
+<script type="text/javascript">
+    
+    // alert($categ);
+    function categ_func(val){
+        $(".commonclass").css('display','none');
+        $("."+val).css('display','block');
+        $(".all-exp").prop('checked', false);
+        $(".expclass").prop('checked', false);
+        $(".gendclass").prop('checked', false);
 
+    }
+
+    function allcateg(val){
+
+        //alert(val);
+        $(".commonclass").css('display','block');
+        $(".all-exp").prop('checked', false);
+        $(".expclass").prop('checked', false);
+        $(".gendclass").prop('checked', false);
+    }
+
+    function expfunc(val){
+
+        $(".commonclass").css('display','none');
+        $("."+val).css('display','block');
+        $(".all-cat").prop('checked', false);
+        $(".catclass").prop('checked', false);
+        $(".gendclass").prop('checked', false);
+    }
+
+    function allexpfunc(){
+
+        $(".commonclass").css('display','block');
+        $(".all-cat").prop('checked', false);
+        $(".catclass").prop('checked', false);
+        $(".gendclass").prop('checked', false);
+    }
+
+    function gendfunc(val){
+
+        $(".commonclass").css('display','none');
+        $("."+val).css('display','block');
+        $(".all-cat").prop('checked', false);
+        $(".catclass").prop('checked', false);
+        $(".all-exp").prop('checked', false);
+        $(".expclass").prop('checked', false);
+        
+
+    }
+
+
+</script>
     
 @endsection

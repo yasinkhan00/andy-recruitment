@@ -58,8 +58,8 @@
                 </div>
                 <div class="float-right">
                     <div class="email">
-                        <a href="index.html#">
-                            <i class="mdi mdi-email"></i> emily@andyrecruitment.co.uk
+                        <a href="mailto:info@andyrecruitment.co.uk">
+                            <i class="mdi mdi-email"></i> info@andyrecruitment.co.uk
                         </a>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
         <div class="container">
             <!-- Logo container-->
             <div>
-                <a href="index.html" class="logo">
+                <a href="{{route('home')}}" class="logo">
                     <img src="{{asset('public/images/ar.jpg')}}" alt="" class="logo-light" height="80" />
                     <img src="{{asset('public/images/ar.jpg')}}" alt="" class="logo-dark" height="80" />
                 </a>
@@ -99,19 +99,69 @@
                 <!-- Navigation Menu-->   
                 <ul class="navigation-menu">
                     <li><a href="{{route('home')}}">Home</a></li>
-                    <li><a href="{{route('home')}}">About Us</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Faqs</a></li>
-                    <li><a href="#">contact</a></li>
+                    <li><a href="{{route('about')}}">About Us</a></li>
+                    <li><a href="{{route('team')}}">Team</a></li>
+                    <li><a href="{{route('contact')}}">contact</a></li>
                 </ul><!--end navigation menu-->
             </div><!--end navigation-->
         </div><!--end container-->
         <!--end end-->
+        <div class="container">
+        <div class="container-fluid">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                    <ul style="list-style-type: none;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    </div>
+                @endif
+
+                @if (session()->has('msg-success'))
+                <div class="alert {{ Session::get('alert-class', 'alert-success') }}">{{ Session::get('msg-success') }}</div>
+                @elseif (session()->has('msg-error'))
+                <div class="alert {{ Session::get('alert-class', 'alert-danger') }}">{{ Session::get('msg-error') }}
+                </div>
+                
+                @endif
+                
+
+            </div>
+        
+    </div>
     </header><!--end header-->
     <!-- Navbar End -->
 
+
    @yield('content')
+   <!-- subscribe start -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-5">
+                    <div class="float-left position-relative notification-icon mr-2">
+                        <i class="mdi mdi-bell-outline text-primary"></i>
+                        <span class="badge badge-pill badge-danger">1</span>
+                    </div>
+                    <h5 class="mt-2 mb-0">Your Job Notification</h5>
+                </div>
+                <div class="col-lg-8 col-md-7 mt-4 mt-sm-0">
+                    <form>
+                        <div class="form-group mb-0">
+                            <div class="input-group mb-0">
+                                <input name="email" id="email" type="email" class="form-control" placeholder="Your email :" required="" aria-describedby="newssubscribebtn">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary submitBnt" type="submit" id="newssubscribebtn">Subscribe</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- subscribe end -->
 
     <!-- footer start -->
     <footer class="footer">
@@ -130,26 +180,26 @@
                 <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                     <p class="text-white mb-4 footer-list-title">Company</p>
                     <ul class="list-unstyled footer-list">
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> About Us</a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Media & Press</a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Career</a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Blog</a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Pricing</a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Marketing</a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> CEOs </a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Agencies</a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Our Apps</a></li>
+                        <li><a href="{{route('about')}}" class="text-foot"><i class="mdi mdi-chevron-right"></i> About Us</a></li>
+                        <li><a href="{{route('team')}}" class="text-foot"><i class="mdi mdi-chevron-right"></i> Team</a></li>
+                        <li><a href="{{route('contact')}}" class="text-foot"><i class="mdi mdi-chevron-right"></i> Contact Us</a></li>
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Blog</a></li> -->
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Pricing</a></li> -->
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Marketing</a></li> -->
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> CEOs </a></li> -->
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Agencies</a></li> -->
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Our Apps</a></li> -->
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-4 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
                     <p class="text-white mb-4 footer-list-title">Resources</p>
                     <ul class="list-unstyled footer-list">
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Support</a></li>
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Support</a></li> -->
                         <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Privacy Policy</a></li>
                         <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Terms</a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Accounting </a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Billing</a></li>
-                        <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> F.A.Q.</a></li>
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Accounting </a></li> -->
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> Billing</a></li> -->
+                        <!-- <li><a href="index.html#" class="text-foot"><i class="mdi mdi-chevron-right"></i> F.A.Q.</a></li> -->
                     </ul>
                 </div>
             
@@ -157,7 +207,7 @@
                     <p class="text-white mb-4 footer-list-title f-17">Business Hours</p>
                     <ul class="list-unstyled text-foot mt-4 mb-0">
                         <li>Monday - Friday : 9:00 to 17:00</li>
-                        <li class="mt-2">Saturday : 10:00 to 15:00</li>
+                        <li class="mt-2">Saturday : Day Off (Holiday)</li>
                         <li class="mt-2">Sunday : Day Off (Holiday)</li>
                     </ul>
                 </div>

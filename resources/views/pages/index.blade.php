@@ -70,7 +70,7 @@ Home
             <div class="row">
                 @foreach($job_count as $s)
                 <div class="col-lg-3 col-md-6 mt-4 pt-2">
-                    <a href="javascript:void(0)">
+                    <a href="{{route('search2',['id'=>$s->job_category['id']])}}">
                         <div class="popu-category-box bg-light rounded text-center p-4">
                             <div class="popu-category-icon mb-3">
                                 <i class="mdi mdi-telegram d-inline-block rounded-pill h3 text-primary"></i>
@@ -138,7 +138,7 @@ Home
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div>
-                                                        <h5 class="f-18"><a href="index.html#" class="text-dark">{{$ss->job_title}}</a></h5>
+                                                        <h5 class="f-18"><a href="{{route('jobdetail',['id'=>$ss->id])}}" class="text-dark">{{$ss->job_title}}</a></h5>
                                                         <p class="text-muted mb-0">{{$ss->company_details['company_name']}}</p>
                                                     </div>
                                                 </div>
@@ -173,7 +173,7 @@ Home
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div>
-                                                        <a href="index.html#" class="text-primary">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                                                        <a href="{{route('jobdetail',['id'=>$ss->id])}}" class="text-primary">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -376,33 +376,7 @@ Home
 
     
 
-    <!-- subscribe start -->
-    <section class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-5">
-                    <div class="float-left position-relative notification-icon mr-2">
-                        <i class="mdi mdi-bell-outline text-primary"></i>
-                        <span class="badge badge-pill badge-danger">1</span>
-                    </div>
-                    <h5 class="mt-2 mb-0">Your Job Notification</h5>
-                </div>
-                <div class="col-lg-8 col-md-7 mt-4 mt-sm-0">
-                    <form>
-                        <div class="form-group mb-0">
-                            <div class="input-group mb-0">
-                                <input name="email" id="email" type="email" class="form-control" placeholder="Your email :" required="" aria-describedby="newssubscribebtn">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary submitBnt" type="submit" id="newssubscribebtn">Subscribe</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- subscribe end -->
+   
 
 
 
